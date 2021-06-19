@@ -497,9 +497,116 @@ function submitHighScore(){
 }
 
 function retakeQuiz(){
-    console.log("Fuck you!");
     var landingPage = document.getElementById("contentarea");
     landingPage.innerHTML = "";
-    landingScreen();
+    questionSelect = [
+        {
+           question: "2+2=?",
+           answers:[
+               "A: 300",
+               "B: 4",
+               "C: 916",
+               "D: 25"
+           ],
+           correctAnsInd: "B: 4"
+        },
+        {        
+           question: "4*6=?",
+           answers:[
+               "A: 32",
+               "B: 14",
+               "C: 24",
+               "D: 2,567,899"
+           ],
+           correctAnsInd: "C: 24"
+        },
+        {        
+            question: "24/12=?",
+            answers:[
+                "A: 600",
+                "B: 12",
+                "C: 678,333,258",
+                "D: 2"
+            ],
+            correctAnsInd: "D: 2"
+         },
+         {        
+            question: "16/4=?",
+            answers:[
+                "A: 60",
+                "B: 4",
+                "C: 67",
+                "D: 11"
+            ],
+            correctAnsInd: "B: 4"
+         },
+         {        
+            question: "9*3=?",
+            answers:[
+                "A: 8",
+                "B: 116",
+                "C: 27",
+                "D: 12"
+            ],
+            correctAnsInd: "C: 27"
+         },
+         {        
+            question: "27/9=?",
+            answers:[
+                "A: 3",
+                "B: 12",
+                "C: 111",
+                "D: 2,236,899"
+            ],
+            correctAnsInd: "A: 3"
+         },
+         {        
+            question: "12*3=?",
+            answers:[
+                "A: 18",
+                "B: 36",
+                "C: 6",
+                "D: 4"
+            ],
+            correctAnsInd: "B: 36"
+         },
+         {        
+            question: "18+9=?",
+            answers:[
+                "A: 27",
+                "B: 45",
+                "C: 38",
+                "D: 999"
+            ],
+            correctAnsInd: "A: 27"
+         },
+         {        
+            question: "26/2=?",
+            answers:[
+                "A: 60",
+                "B: 23",
+                "C: 13",
+                "D: 29"
+            ],
+            correctAnsInd: "C: 13"
+         },
+         {        
+            question: "16/8=?",
+            answers:[
+                "A: 16",
+                "B: 25",
+                "C: 333,258",
+                "D: 2"
+            ],
+            correctAnsInd: "D: 2"
+         }
+    ]
+   timer = "10";
+   deleteArray=[];
+   questionsAnswered=0;
+   score = 0;
+   scoreIndex = 1;
+
+   landingScreen();
 
 }
