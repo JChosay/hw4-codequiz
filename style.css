@@ -1,3 +1,32 @@
 *,*::before,*::after{
         box-sizing: border-box;
-}                                 
+}
+
+*{
+        width: 90%;
+}
+
+#header{
+        position: relative;
+        display: flex;
+        margin: auto;
+        text-align: center;
+        
+}
+
+#contentarea{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+}
+
+#answersList{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 40%;
+        margin: auto;
+}
