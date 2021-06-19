@@ -246,6 +246,9 @@ function wrongAnswer(){
     score--;
     console.log("The score is: "+score);
     correctAnswer = ""
+    if (questionsAnswered===9){
+        lastQuest();
+    }
     startQuiz();
 }
 
@@ -327,6 +330,7 @@ function lastQuest(){
     ansA.addEventListener('click',function(){
         if (this.value === correctAnswer){
             console.log("You clicked: "+this.value);
+            score ++;
             winScreen();
         }else{
             wrongAnswer();
@@ -336,6 +340,7 @@ function lastQuest(){
     ansB.addEventListener('click',function(){
         if (this.value === correctAnswer){
             console.log("You clicked: "+this.value);
+            score ++;
             winScreen();
         }else{
             wrongAnswer();
@@ -345,6 +350,7 @@ function lastQuest(){
     ansC.addEventListener('click',function(){
         if (this.value === correctAnswer){
             console.log("You clicked: "+this.value);
+            score ++;
             winScreen();
         }else{
             wrongAnswer();
@@ -354,6 +360,7 @@ function lastQuest(){
     ansD.addEventListener('click',function(){
         if (this.value === correctAnswer){
             console.log("You clicked: "+this.value);
+            score ++;
             winScreen();
         }else{
             wrongAnswer();
@@ -363,9 +370,7 @@ function lastQuest(){
 }
 
 function winScreen(){
-    score ++;
     var scoresDisplay = document.getElementById("highscores").style.removeProperty("display");
-    
     var landingPage = document.getElementById("contentarea");
     landingPage.innerHTML = "";
     var landingh1Tag = document.createElement("h1");
@@ -373,4 +378,31 @@ function winScreen(){
     landingh1Tag.appendChild(landingh1text);  
     landingPage.appendChild(landingh1Tag);
     console.log("The score is: "+score);
+
+    var landingh2Tag = document.createElement("h2");
+    var landingh2text = document.createTextNode("Your score is: "+score);
+    landingh2Tag.appendChild(landingh2text);  
+    landingPage.appendChild(landingh2Tag);
+    console.log("The score is: "+score);
+
+    var landingh3Tag = document.createElement("h3");
+    if (score<5){
+        var landingh3text = document.createTextNode("Not too great. Try again.");
+    }else if (score<8){
+        var landingh3text = document.createTextNode("Not bad.");
+    }else{
+        var landingh3text = document.createTextNode("Nice!");
+    }
+    landingh3Tag.appendChild(landingh3text);  
+    landingPage.appendChild(landingh3Tag);
+
+    var submitScore = document.createElement('input');
+    
+    submitScore.setAttribute("type","button");
+    submitScore.setAttribute("id","submitChoice");
+    submitScore.setAttribute("value","Submit Score");
+    
+    landingPage.appendChild(submitScore);
+    
+
 }
