@@ -4,6 +4,7 @@ var deleteArray=[];
 var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
+var highscoreTrack = [];
 
 
 var questionSelect = [
@@ -148,7 +149,8 @@ function quizTimer(){
         if (timeLeft>1){
             timerDisplayText.textContent = timeLeft + " seconds remain!";
             timeLeft--;
-        }else if(timeLeft ===1){
+        }
+        else if(timeLeft ===1){
             timerDisplayText.textContent = timeLeft + " second remains!";
             timeLeft--;
         }else{
@@ -449,11 +451,20 @@ function winScreen(){
     
     submitScore.addEventListener('click',function(){
         event.preventDefault();
-        window.localStorage.setItem(typeText.value,score);
-        var highScoresPage = document.getElementById("contentarea");
+        
+        highscoreTrack = [
+            {
+               initials: typeText.value,
+               hScore: score
+            }
+        ]
+        
+        window.localStorage.setItem('highScoreTrack',JSON.stringify(highscoreTrack));
+        var highScoresPage = document.getElementById ("contentarea");
     highScoresPage.innerHTML = "";
     var scoresDisplay = document.getElementById("highscores").style.display = "none";
         console.log("leaving winScreen.");
+        highscoreTrack =[];
         submitHighScore();
     })
 
@@ -466,14 +477,29 @@ function submitHighScore(){
     var scoresHeaderText = document.createTextNode("High Scores:");
     scoresHeaderTag.appendChild(scoresHeaderText);  
     highScores.appendChild(scoresHeaderTag);
-    var scoreCount = localStorage.length;
 
-for(i=0; i<scoreCount; i++){
+    highScoreTrack = JSON.parse(window.localStorage.getItem('highScoreTrack'));
+    console.log(highScoreTrack);
+    
+
     var tagScore = document.createElement('h2');
-    var scoreText = document.createTextNode(localStorage.getItem[i]);
+    var temp = localStorage.getItem
+    var scoreText = document.createTextNode(highScoreTrack[0].initials+": "+highScoreTrack[0].hScore);
     tagScore.appendChild(scoreText);
     highScores.appendChild(tagScore);
+
+    var button = document.createElement('input');
+    button.setAttribute("type", "button");
+    button.setAttribute("value","Retake Quiz");
+    highScores.appendChild(button);
+    button.addEventListener("click",retakeQuiz);
+
 }
-    
-    
+
+function retakeQuiz(){
+    console.log("Fuck you!");
+    var landingPage = document.getElementById("contentarea");
+    landingPage.innerHTML = "";
+    landingScreen();
+
 }
