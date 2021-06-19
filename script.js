@@ -5,6 +5,7 @@ var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
 
+
 var questionSelect = [
     {
        question: "2+2=?",
@@ -130,9 +131,33 @@ function landingScreen(){
     button.setAttribute("value","Start Quiz");
     landingPage.appendChild(button);
     button.addEventListener("click",startQuiz);
+    button.addEventListener("click",quizTimer);
 }
 
 landingScreen();
+
+function quizTimer(){
+    var timeLeft = 10;
+    var scoreCard = document.getElementById('scorecard')
+    var timerDisplayTag = document.createElement('h1');
+    var timerDisplayText = document.createTextNode('');
+    timerDisplayTag.appendChild(timerDisplayText);
+    scoreCard.appendChild(timerDisplayTag);
+
+    var timeInterval = setInterval(function(){
+        if (timeLeft>1){
+            timerDisplayText.textContent = timeLeft + " seconds remain!";
+            timeLeft--;
+        }else if(timeLeft ===1){
+            timerDisplayText.textContent = timeLeft + " second remains!";
+            timeLeft--;
+        }else{
+            timerDisplayText.textContent = "";
+            clearInterval(timeInterval);
+            winScreen();
+        }
+    },1000);
+}
 
 function startQuiz(){
     if (questionsAnswered===9){
@@ -441,7 +466,10 @@ function submitHighScore(){
     console.log("Begin submitScore");
     var highScores = document.getElementById("contentarea");
     var scoresHeaderTag = document.createElement("h1");
-    var scoresHeaderText = document.createTextNode("Fuck you!");
+    var scoresHeaderText = document.createTextNode("High Scores:");
     scoresHeaderTag.appendChild(scoresHeaderText);  
-    highScores.appendChild(scoresHeaderTag);        
+    highScores.appendChild(scoresHeaderTag);
+
+    
+    
 }
