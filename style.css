@@ -41,3 +41,12 @@
         gap: 10px;
 }
 
+#scorecard{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        text-align: center;
+        margin: auto;
+}
+

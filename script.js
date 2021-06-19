@@ -273,9 +273,6 @@ function pageQuizContent(){
 }
 
 function wrongAnswer(){
-    console.log("Wrong. Your face is dumb.");
-    score--;
-    console.log("The score is: "+score);
     correctAnswer = ""
     if (questionsAnswered===9){
         lastQuest();
@@ -469,7 +466,14 @@ function submitHighScore(){
     var scoresHeaderText = document.createTextNode("High Scores:");
     scoresHeaderTag.appendChild(scoresHeaderText);  
     highScores.appendChild(scoresHeaderTag);
+    var scoreCount = localStorage.length;
 
+for(i=0; i<scoreCount; i++){
+    var tagScore = document.createElement('h2');
+    var scoreText = document.createTextNode(localStorage.getItem[i]);
+    tagScore.appendChild(scoreText);
+    highScores.appendChild(tagScore);
+}
     
     
 }
