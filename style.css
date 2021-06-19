@@ -36,7 +36,7 @@
 #buttonDisplay{
         display: grid;
         flex-wrap: wrap;
-        width: 100%;
+        width: 80%;
         margin: auto;
         gap: 10px;
 }
@@ -48,5 +48,15 @@
         width: 50%;
         text-align: center;
         margin: auto;
+}
+
+#choiceA:hover, #choiceB:hover, #choiceC:hover, #choiceD:hover{
+        background-color: #710C04;
+        color: white;
+}
+
+#initialFormContainer{
+        display: flex;
+        width: 80%;
 }
 
