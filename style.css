@@ -21,13 +21,23 @@
         width: 50%;
         text-align: center;
         margin: auto;
+        padding-top: 8rem;
 }
 
 #answersList{
-        display: flex;
+        display: grid;
+        flex-wrap: wrap;
         flex-direction: column;
-        justify-content: space-around;
-        width: 40%;
+        width: 95%;
         margin: auto;
-        gap: 5px;
+        gap: 10px;
 }
+
+#buttonDisplay{
+        display: grid;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: auto;
+        gap: 10px;
+}
+

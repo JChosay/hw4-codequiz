@@ -3,6 +3,7 @@ var timer = "10";
 var deleteArray=[];
 var questionsAnswered=0;
 var score = 0;
+var scoreIndex = 1;
 
 var questionSelect = [
     {
@@ -120,7 +121,7 @@ function landingScreen(){
     landingPage.appendChild(landingh2Tag);
 
     var landingInstructions = document.createElement("p");
-    var landingInstrText = document.createTextNode("How many of the following questions can you answer? Correctly, I mean? Did you even pay attention in school anyway? Maybe you're a big ol' dummy, too, and not just a jibroni; let's find out.");
+    var landingInstrText = document.createTextNode("How many of the following questions can you answer? Correctly, I mean? Did you even pay attention in school anyway? Maybe you're a big ol' dummy; let's find out.");
     landingInstructions.appendChild(landingInstrText);
     landingPage.appendChild(landingInstructions);
 
@@ -137,6 +138,7 @@ function startQuiz(){
     if (questionsAnswered===9){
         lastQuest();
     }
+    console.log("Back to startQuiz");
     var scoresDisplay = document.getElementById("highscores").style.display = "none";
     var questionPage = document.getElementById("contentarea");
     questionPage.innerHTML = "";
@@ -157,6 +159,10 @@ function startQuiz(){
     ansDiv.setAttribute("id","answersList")
     questionPage.appendChild(ansDiv);
 
+    var buttonDiv = document.createElement('div');
+    buttonDiv.setAttribute('id','buttonDisplay');
+    answersList.appendChild(buttonDiv);
+
     var choiceA = document.createElement('input');
     var choiceB = document.createElement('input');
     var choiceC = document.createElement('input');
@@ -169,10 +175,10 @@ function startQuiz(){
     choiceC.setAttribute("id","choiceC");
     choiceD.setAttribute("type","button");
     choiceD.setAttribute("id","choiceD");
-    answersList.appendChild(choiceA);
-    answersList.appendChild(choiceB);
-    answersList.appendChild(choiceC);
-    answersList.appendChild(choiceD);
+    buttonDisplay.appendChild(choiceA);
+    buttonDisplay.appendChild(choiceB);
+    buttonDisplay.appendChild(choiceC);
+    buttonDisplay.appendChild(choiceD);
     pageQuizContent();
 }
 
@@ -396,13 +402,46 @@ function winScreen(){
     landingh3Tag.appendChild(landingh3text);  
     landingPage.appendChild(landingh3Tag);
 
-    var submitScore = document.createElement('input');
+    var formContainerDiv = document.createElement('form');
+    formContainerDiv.setAttribute('id','initialFormContainer');
+    landingPage.appendChild(formContainerDiv);
     
-    submitScore.setAttribute("type","button");
-    submitScore.setAttribute("id","submitChoice");
-    submitScore.setAttribute("value","Submit Score");
     
-    landingPage.appendChild(submitScore);
-    
+    var inputTag = document.createElement("h3");
+    inputTag.setAttribute('id','inputTag');
+    var inputText = document.createTextNode("Enter your initials:");
+    inputTag.appendChild(inputText);  
+    formContainerDiv.appendChild(inputTag);
 
+    var typeText = document.createElement('input');
+    typeText.setAttribute('type','text');
+    typeText.setAttribute('id','typeTextBox');
+    typeText.setAttribute('maxlength','3');
+    formContainerDiv.appendChild(typeText);
+    
+    var submitScore = document.createElement('input');
+    submitScore.setAttribute("type","submit");
+    submitScore.setAttribute("id","submitChoice");
+    submitScore.setAttribute("value","Submit");
+    formContainerDiv.appendChild(submitScore);
+    
+    submitScore.addEventListener('click',function(){
+        event.preventDefault();
+        window.localStorage.setItem(typeText.value,score);
+        var highScoresPage = document.getElementById("contentarea");
+    highScoresPage.innerHTML = "";
+    var scoresDisplay = document.getElementById("highscores").style.display = "none";
+        console.log("leaving winScreen.");
+        submitHighScore();
+    })
+
+}
+
+function submitHighScore(){
+    console.log("Begin submitScore");
+    var highScores = document.getElementById("contentarea");
+    var scoresHeaderTag = document.createElement("h1");
+    var scoresHeaderText = document.createTextNode("Fuck you!");
+    scoresHeaderTag.appendChild(scoresHeaderText);  
+    highScores.appendChild(scoresHeaderTag);        
 }
