@@ -5,8 +5,6 @@ var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
 
-
-
 var questionSelect = [
     {
        question: "2+2=?",
@@ -165,7 +163,7 @@ function startQuiz(){
     if (questionsAnswered===9){
         lastQuest();
     }
-    console.log("Back to startQuiz");
+
     var scoresDisplay = document.getElementById("highscores").style.display = "none";
     var questionPage = document.getElementById("contentarea");
     questionPage.innerHTML = "";
@@ -223,7 +221,6 @@ function pageQuizContent(){
     }
     
     correctAnswer=questionSelect[index].correctAnsInd;
-    console.log("The correct answer is: "+correctAnswer);
 
     //sets question and answer-button values
     question.textContent = questionSelect[index].question;
@@ -235,7 +232,6 @@ function pageQuizContent(){
 
     ansA.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
@@ -245,7 +241,6 @@ function pageQuizContent(){
     })
     ansB.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
@@ -255,7 +250,6 @@ function pageQuizContent(){
     })
     ansC.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
@@ -265,7 +259,6 @@ function pageQuizContent(){
     })
     ansD.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             var deleteArray = questionSelect.splice([index],1);
             rightAnswer();
         }else{
@@ -285,10 +278,7 @@ function wrongAnswer(){
 function rightAnswer(){
     correctAnswer = ""
     questionsAnswered++;
-    console.log("You've answered "+questionsAnswered+" questions.");
     score++;
-    console.log("The score is: "+score);
-    console.log("questionSelect has "+questionSelect.length+" items left in it.");
     if (questionsAnswered===9){
         lastQuest();
         }else{
@@ -298,8 +288,6 @@ function rightAnswer(){
 
 
 function lastQuest(){
-    console.log("Last Question screen!");
-    console.log(questionSelect);
     var scoresDisplay = document.getElementById("highscores").style.display = "none";
     var questionPage = document.getElementById("contentarea");
     questionPage.innerHTML = "";
@@ -345,9 +333,7 @@ function lastQuest(){
     
     var index = 0;
     
-    console.log("the index value is: "+index);
     correctAnswer=questionSelect[index].correctAnsInd;
-    console.log("The correct answer is: "+correctAnswer);
 
     //sets question and answer-button values
     question.textContent = questionSelect[index].question;
@@ -359,7 +345,6 @@ function lastQuest(){
 
     ansA.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             score ++;
             winScreen();
         }else{
@@ -369,7 +354,6 @@ function lastQuest(){
     })
     ansB.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             score ++;
             winScreen();
         }else{
@@ -379,7 +363,6 @@ function lastQuest(){
     })
     ansC.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             score ++;
             winScreen();
         }else{
@@ -389,7 +372,6 @@ function lastQuest(){
     })
     ansD.addEventListener('click',function(){
         if (this.value === correctAnswer){
-            console.log("You clicked: "+this.value);
             score ++;
             winScreen();
         }else{
@@ -407,13 +389,11 @@ function winScreen(){
     var landingh1text = document.createTextNode("All done!");
     landingh1Tag.appendChild(landingh1text);  
     landingPage.appendChild(landingh1Tag);
-    console.log("The score is: "+score);
 
     var landingh2Tag = document.createElement("h2");
     var landingh2text = document.createTextNode("Your score is: "+score);
     landingh2Tag.appendChild(landingh2text);  
     landingPage.appendChild(landingh2Tag);
-    console.log("The score is: "+score);
 
     var landingh3Tag = document.createElement("h3");
     if (score<5){
@@ -429,7 +409,6 @@ function winScreen(){
     var formContainerDiv = document.createElement('form');
     formContainerDiv.setAttribute('id','initialFormContainer');
     landingPage.appendChild(formContainerDiv);
-    
     
     var inputTag = document.createElement("h3");
     inputTag.setAttribute('id','inputTag');
@@ -453,7 +432,6 @@ function winScreen(){
         event.preventDefault();
 
         var highScoreTrack = localStorage.getItem("highScoreTrack");
-        console.log(highScoreTrack);
 
         if(highScoreTrack===null){
             highScoreTrack = [
@@ -471,12 +449,9 @@ function winScreen(){
                 }
             ]
 
-            console.log(newScore);
             var scoreBoard = JSON.parse(localStorage.getItem("highScoreTrack"));
-            console.log(scoreBoard);
             highScoreTrack = scoreBoard.concat(newScore);
             // scoreBoard += newScore;
-            console.log(highScoreTrack);
             localStorage.setItem('highScoreTrack', JSON.stringify(highScoreTrack));
         }
         
@@ -484,14 +459,11 @@ function winScreen(){
         var highScoresPage = document.getElementById ("contentarea");
         highScoresPage.innerHTML = "";
         var scoresDisplay = document.getElementById("highscores").style.display = "none";
-        console.log("leaving winScreen.");
         submitHighScore();
     })
-
 }
 
 function submitHighScore(){
-    console.log("Begin submitScore");
     var highScores = document.getElementById("contentarea");
     var scoresHeaderTag = document.createElement("h1");
     var scoresHeaderText = document.createTextNode("High Scores:");
@@ -499,8 +471,6 @@ function submitHighScore(){
     highScores.appendChild(scoresHeaderTag);
 
     highScoreTrack = JSON.parse(window.localStorage.getItem('highScoreTrack'));
-    console.log("Here is highScoreTrack's length: "+highScoreTrack.length);
-    console.log(highScoreTrack);
 
     for (var i=0; i<highScoreTrack.length;i++){
         var tagScore = document.createElement('h2');
@@ -516,7 +486,6 @@ function submitHighScore(){
     button.setAttribute("value","Retake Quiz");
     highScores.appendChild(button);
     button.addEventListener("click",retakeQuiz);
-
 }
 
 function retakeQuiz(){
@@ -629,7 +598,5 @@ function retakeQuiz(){
    questionsAnswered=0;
    score = 0;
    scoreIndex = 1;
-
    landingScreen();
-
 }
