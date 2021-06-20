@@ -476,7 +476,7 @@ function submitHighScore(){
         var tagScore = document.createElement('h2');
         tagScore.setAttribute('class',"topscores");
         var temp = localStorage.getItem
-        var scoreText = document.createTextNode(highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
+        var scoreText = document.createTextNode((i+1)+". "+highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
         tagScore.appendChild(scoreText);
         highScores.appendChild(tagScore);
     }
