@@ -4,7 +4,7 @@ var deleteArray=[];
 var questionsAnswered=0;
 var score = 0;
 var scoreIndex = 1;
-var highscoreTrack = [];
+
 
 
 var questionSelect = [
@@ -451,20 +451,40 @@ function winScreen(){
     
     submitScore.addEventListener('click',function(){
         event.preventDefault();
+
+        var highScoreTrack = localStorage.getItem("highScoreTrack");
+        console.log(highScoreTrack);
+
+        if(highScoreTrack===null){
+            highScoreTrack = [
+                {
+                   initials: typeText.value,
+                   hScore: score
+                }
+            ]
+            window.localStorage.setItem('highScoreTrack',JSON.stringify(highScoreTrack));
+        }else{
+            var newScore = [
+                {
+                   initials: typeText.value,
+                   hScore: score
+                }
+            ]
+
+            console.log(newScore);
+            var scoreBoard = JSON.parse(localStorage.getItem("highScoreTrack"));
+            console.log(scoreBoard);
+            highScoreTrack = scoreBoard.concat(newScore);
+            // scoreBoard += newScore;
+            console.log(highScoreTrack);
+            localStorage.setItem('highScoreTrack', JSON.stringify(highScoreTrack));
+        }
         
-        highscoreTrack = [
-            {
-               initials: typeText.value,
-               hScore: score
-            }
-        ]
-        
-        window.localStorage.setItem('highScoreTrack',JSON.stringify(highscoreTrack));
+        window.localStorage.setItem('highScoreTrack',JSON.stringify(highScoreTrack));
         var highScoresPage = document.getElementById ("contentarea");
-    highScoresPage.innerHTML = "";
-    var scoresDisplay = document.getElementById("highscores").style.display = "none";
+        highScoresPage.innerHTML = "";
+        var scoresDisplay = document.getElementById("highscores").style.display = "none";
         console.log("leaving winScreen.");
-        highscoreTrack =[];
         submitHighScore();
     })
 
@@ -479,14 +499,17 @@ function submitHighScore(){
     highScores.appendChild(scoresHeaderTag);
 
     highScoreTrack = JSON.parse(window.localStorage.getItem('highScoreTrack'));
+    console.log("Here is highScoreTrack's length: "+highScoreTrack.length);
     console.log(highScoreTrack);
-    
 
-    var tagScore = document.createElement('h2');
-    var temp = localStorage.getItem
-    var scoreText = document.createTextNode(highScoreTrack[0].initials+": "+highScoreTrack[0].hScore);
-    tagScore.appendChild(scoreText);
-    highScores.appendChild(tagScore);
+    for (var i=0; i<highScoreTrack.length;i++){
+        var tagScore = document.createElement('h2');
+        tagScore.setAttribute('class',"topscores");
+        var temp = localStorage.getItem
+        var scoreText = document.createTextNode(highScoreTrack[i].initials+": "+highScoreTrack[i].hScore);
+        tagScore.appendChild(scoreText);
+        highScores.appendChild(tagScore);
+    }
 
     var button = document.createElement('input');
     button.setAttribute("type", "button");
